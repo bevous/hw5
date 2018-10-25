@@ -6,7 +6,6 @@ largeint::largeint()
 {
 	myInt = "";
 	mydigits;
-	setdigits();
 }
 largeint::~largeint()
 {
@@ -14,50 +13,69 @@ largeint::~largeint()
 
 //setter
 void largeint::setInt(string input) {
-	for (int x = 0; x < input.length(); x++) {
-		switch (input[x]) {
-		case('0'): {
+	for (int x = 0; abs(x) < input.length(); x++) {
+		if (input[x] == '0') {
 			//nothing
+			//cout << "found it" << endl;
 		}
-		case('1'): {
+		else if (input[x] == '1') {
+			//cout << "found it" << endl;
 			//nothing
 			}
-		case('2'): {
-			//nothing
+		else if (input[x] == '2') {
+			
+			//cout << "found it" << endl;//nothing
 			}
-		case('3'): {			
+		else if (input[x] == '3') {			
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('4'): {
+		else if (input[x] == '4') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('5'): {
+		else if (input[x] == '5') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('6'): {
+		else if (input[x] == '6') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('7'): {
+		else if (input[x] == '7') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('8'): {
+		else if (input[x] == '8') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		case('9'): {
+		else if (input[x] == '9') {
 			//nothing
+			//cout << "found it" << endl;
 			}
-		default: {
+		else {
+			//cout << "not here" << endl;
 			input.erase(x, 1);
+			if (x >= 0) {
+				x -= 1;
+			}
 		}
-		}
+		
 	}
 
 	myInt = input;
+	setdigits();
 }
 void largeint::setdigits() {
-	for (int x = myInt.length()-1; x !=0 ; x--) {
-		mydigits.push_back(myInt[x]);
+	mydigits.empty();
+	for (int x = 0; x < myInt.length(); x++) {
+		mydigits.push_back(myInt[x]-48);
+		//cout << "digits" << mydigits.back() << endl;
 	}
+	/*for (int x = 0; x < mydigits.size(); x++) {
+		cout << mydigits[x] << endl;
+	}*/
 }
 
 //getters
@@ -69,7 +87,7 @@ vector<int> largeint::getdigits() {
 }
 
 //arithmatic
-largeint& largeint::operator+(largeint& rh) {
+string largeint::operator+(largeint& rh) {
 	largeint result;
 	int carryover = 0;
 	int resulTemp = 0;
@@ -78,30 +96,44 @@ largeint& largeint::operator+(largeint& rh) {
 	
 	
 	for (int x = 0; x < mydigits.size() || x < rh.getdigits().size(); x++) {
-		resulTemp = (mydigits[mydigits.size() - x] + rh.getdigits()[rh.getdigits().size() - x] + carryover);
+		
+		cout << "leftside = " << mydigits[mydigits.size() - 1 - x] << endl;
+		cout << "rightside = " << rh.getdigits()[rh.getdigits().size() - 1 - x] << endl;
+		cout << "carry = " << carryover << endl;
+		resulTemp = (mydigits[mydigits.size()-1 - x] + rh.getdigits()[rh.getdigits().size()-1 - x] + carryover);
+		cout << "--- result = " << resulTemp << '\n' << endl;
+		
 		tempaddition.push_back(resulTemp % 10);
-		carryover = resulTemp - tempaddition[tempaddition.size() - 1];
-		if (x++ == mydigits.size() || x++ == rh.getdigits().size() && carryover != 0) {
+		cout << "this place = " << resulTemp % 10 << endl;
+
+		carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+		cout << "carry = " << carryover << endl;
+
+		if (x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0) {
+			
 			while (carryover != 0) {
-				if (x++ == mydigits.size()) {
+				if (x + 1 == mydigits.size()) {
 					resulTemp = rh.getdigits()[rh.getdigits().size() - x] + carryover;
 					tempaddition.push_back(resulTemp % 10);
-					carryover = resulTemp - tempaddition[tempaddition.size() - 1];
+					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+					cout << "carry = " << carryover << endl;
 
-					if (carryover == 0 && x++ < mydigits.size()) {
-						for (int y = x++; y < mydigits.size(); y++) {
+					if (carryover == 0 && x+1 < mydigits.size()) {
+						for (int y = x + 1; y < mydigits.size(); y++) {
+							cout << "finishing up" << endl;
 							tempaddition.push_back(mydigits[mydigits.size() - y]);
 						}
 					}
 
 				}
-				else if (x++ == rh.getdigits().size()) {
+				else if (x + 1 == rh.getdigits().size()) {
 					resulTemp = mydigits[mydigits.size() - x] + carryover;
 					tempaddition.push_back(resulTemp % 10);
-					carryover = resulTemp - tempaddition[tempaddition.size() - 1];
-
-					if (carryover == 0 && x++ < mydigits.size()) {
-						for (int y = x++; y < rh.getdigits().size(); y++) {
+					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+					cout << "carry = " << carryover << endl;
+					if (carryover == 0 && x + 1 < mydigits.size()) {
+						for (int y = x + 1; y < rh.getdigits().size(); y++) {
+							cout << "finishing up" << endl;
 							tempaddition.push_back(rh.getdigits()[rh.getdigits().size() - y]);
 						}
 					}
@@ -111,9 +143,14 @@ largeint& largeint::operator+(largeint& rh) {
 		}
 	}
 	
-	for (int x = 0; x < tempaddition.size(); x++) {
+	for (int x = tempaddition.size()-1; x >= 0 ; x--) {
 		newint += to_string(tempaddition[x]);
+		cout << "new number" << newint << endl;
 	}
 
 	result.setInt(newint);
+	return newint;
 }
+//void largeint::operator=(largeint& rh) {
+//	myInt = rh.getValue();
+//}

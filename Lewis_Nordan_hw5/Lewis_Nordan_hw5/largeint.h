@@ -22,7 +22,7 @@ public:
 	string getValue();
 	vector<int> getdigits();
 	//arithmatic
-	largeint& operator+(largeint& rh);
-
+	string operator+(largeint& rh);
+	//void operator=(largeint& rh);
 };
 
