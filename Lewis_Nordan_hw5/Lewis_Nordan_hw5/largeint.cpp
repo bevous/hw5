@@ -106,40 +106,35 @@ string largeint::operator+(largeint& rh) {
 		tempaddition.push_back(resulTemp % 10);
 		cout << "this place = " << resulTemp % 10 << endl;
 
-		//for debuging
-		newint = "";
-		for (int x = tempaddition.size() - 1; x >= 0; x--) {
-			newint += to_string(tempaddition[x]);
-			cout << "new number" << newint << endl;
-		}
-
 		carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
 		cout << "carry = " << carryover <<'\n'<< endl;
 		// logic for numbers of differing length / extra carryover
 		int y = x + 1;
-		if ((x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0) || (y + 1 == mydigits.size() || y + 1 == rh.getdigits().size())) {
+		if ((x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0)) {
 			
 			cout << "in block 2" << endl;
-			while (carryover != 0 || y + 1 != mydigits.size() || y + 1 != rh.getdigits().size() ) {
+			while (carryover != 0 || y + 1 < mydigits.size() || y + 1 < rh.getdigits().size() ) { //check this for error
 				
 				cout << "in the loop" << '\n' << "x= " << x << '\n' << "y=" << y << endl;
 				if (mydigits.size() == rh.getdigits().size()) {
 					tempaddition.push_back(carryover);
 					carryover = 0;
 				}
-				else if (x + 1 == mydigits.size()) {
+				// if number 2 is larger than number 1
+				else if (rh.getdigits().size() > mydigits.size()) { //check this ligic
 					cout << "part 1" << endl;
-					
-					resulTemp = rh.getdigits()[rh.getdigits().size() - y] + carryover;
-					cout << "digits at pos" << y + 1 << ":  " << rh.getdigits()[rh.getdigits().size() - y] << " + " << carryover << " = " << resulTemp << endl;
-					y += 1;
-					tempaddition.push_back(resulTemp % 10);
-					cout << "this place = " << resulTemp % 10 << endl;
+					if (y < rh.getdigits().size()) {
+						resulTemp = rh.getdigits()[rh.getdigits().size() - y] + carryover;
+						cout << "digits at pos" << y + 1 << ":  " << rh.getdigits()[rh.getdigits().size() - y] << " + " << carryover << " = " << resulTemp << endl;
+						y += 1;
+						tempaddition.push_back(resulTemp % 10);
+						cout << "this place = " << resulTemp % 10 << endl;
 
-					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-					cout << "carry = " << carryover << endl;
-
-					if (carryover == 0 && x+1 < mydigits.size()) {
+						carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+						cout << "carry = " << carryover << endl;
+					}
+					// fix this
+					if (carryover == 0 && y+1 < mydigits.size()) {
 						for (int y = x + 1; y < mydigits.size(); y++) {
 							cout << "finishing up" << endl;
 							tempaddition.push_back(mydigits[mydigits.size() - y]);
@@ -147,6 +142,7 @@ string largeint::operator+(largeint& rh) {
 					}
 
 				}
+				// number 1 is larger than number 2
 				else if (x + 1 == rh.getdigits().size()) {
 					cout << "part 2" << endl;
 					resulTemp = mydigits[mydigits.size() - x] + carryover;
