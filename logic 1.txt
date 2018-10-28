@@ -1,0 +1,47 @@
+int y = x + 1;
+		if ((x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0) || (y + 1 == mydigits.size() || y + 1 == rh.getdigits().size())) {
+			
+			cout << "in block 2" << endl;
+			while (carryover != 0 || y + 1 != mydigits.size() || y + 1 != rh.getdigits().size() ) {
+				
+				cout << "in the loop" << '\n' << "x= " << x << '\n' << "y=" << y << endl;
+				if (mydigits.size() == rh.getdigits().size()) {
+					tempaddition.push_back(carryover);
+					carryover = 0;
+				}
+				else if (x + 1 == mydigits.size()) {
+					cout << "part 1" << endl;
+					
+					resulTemp = rh.getdigits()[rh.getdigits().size() - y] + carryover;
+					cout << "digits at pos" << y + 1 << ":  " << rh.getdigits()[rh.getdigits().size() - y] << " + " << carryover << " = " << resulTemp << endl;
+					y += 1;
+					tempaddition.push_back(resulTemp % 10);
+					cout << "this place = " << resulTemp % 10 << endl;
+
+					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+					cout << "carry = " << carryover << endl;
+
+					if (carryover == 0 && x+1 < mydigits.size()) {
+						for (int y = x + 1; y < mydigits.size(); y++) {
+							cout << "finishing up" << endl;
+							tempaddition.push_back(mydigits[mydigits.size() - y]);
+						}
+					}
+
+				}
+				else if (x + 1 == rh.getdigits().size()) {
+					cout << "part 2" << endl;
+					resulTemp = mydigits[mydigits.size() - x] + carryover;
+					tempaddition.push_back(resulTemp % 10);
+					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+					cout << "carry = " << carryover << endl;
+					if (carryover == 0 && x + 1 < mydigits.size()) {
+						for (int y = x + 1; y < rh.getdigits().size(); y++) {
+							cout << "finishing up" << endl;
+							tempaddition.push_back(rh.getdigits()[rh.getdigits().size() - y]);
+						}
+					}
+
+				}
+			}
+		}

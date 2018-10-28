@@ -12,11 +12,13 @@ largeint::~largeint()
 }
 
 //setter
+//removes all invalid characters
 void largeint::setInt(string input) {
 	for (int x = 0; abs(x) < input.length(); x++) {
 		if (input[x] == '0') {
-			//nothing
-			//cout << "found it" << endl;
+			if (x == 0) {
+				input.erase(x, 1);
+			}
 		}
 		else if (input[x] == '1') {
 			//cout << "found it" << endl;
@@ -95,26 +97,45 @@ string largeint::operator+(largeint& rh) {
 	string newint = "";
 	
 	
-	for (int x = 0; x < mydigits.size() || x < rh.getdigits().size(); x++) {
+	for (int x = 0; x < mydigits.size() && x < rh.getdigits().size(); x++) {
+		// does all adition up to where the length of the numbers differs or there is leffovers to carry over
 		
-		cout << "leftside = " << mydigits[mydigits.size() - 1 - x] << endl;
-		cout << "rightside = " << rh.getdigits()[rh.getdigits().size() - 1 - x] << endl;
-		cout << "carry = " << carryover << endl;
 		resulTemp = (mydigits[mydigits.size()-1 - x] + rh.getdigits()[rh.getdigits().size()-1 - x] + carryover);
-		cout << "--- result = " << resulTemp << '\n' << endl;
-		
+		cout << "digits at pos" << x+1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+
 		tempaddition.push_back(resulTemp % 10);
 		cout << "this place = " << resulTemp % 10 << endl;
 
-		carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-		cout << "carry = " << carryover << endl;
+		//for debuging
+		newint = "";
+		for (int x = tempaddition.size() - 1; x >= 0; x--) {
+			newint += to_string(tempaddition[x]);
+			cout << "new number" << newint << endl;
+		}
 
-		if (x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0) {
+		carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
+		cout << "carry = " << carryover <<'\n'<< endl;
+		// logic for numbers of differing length / extra carryover
+		int y = x + 1;
+		if ((x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0) || (y + 1 == mydigits.size() || y + 1 == rh.getdigits().size())) {
 			
-			while (carryover != 0) {
-				if (x + 1 == mydigits.size()) {
-					resulTemp = rh.getdigits()[rh.getdigits().size() - x] + carryover;
+			cout << "in block 2" << endl;
+			while (carryover != 0 || y + 1 != mydigits.size() || y + 1 != rh.getdigits().size() ) {
+				
+				cout << "in the loop" << '\n' << "x= " << x << '\n' << "y=" << y << endl;
+				if (mydigits.size() == rh.getdigits().size()) {
+					tempaddition.push_back(carryover);
+					carryover = 0;
+				}
+				else if (x + 1 == mydigits.size()) {
+					cout << "part 1" << endl;
+					
+					resulTemp = rh.getdigits()[rh.getdigits().size() - y] + carryover;
+					cout << "digits at pos" << y + 1 << ":  " << rh.getdigits()[rh.getdigits().size() - y] << " + " << carryover << " = " << resulTemp << endl;
+					y += 1;
 					tempaddition.push_back(resulTemp % 10);
+					cout << "this place = " << resulTemp % 10 << endl;
+
 					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
 					cout << "carry = " << carryover << endl;
 
@@ -127,6 +148,7 @@ string largeint::operator+(largeint& rh) {
 
 				}
 				else if (x + 1 == rh.getdigits().size()) {
+					cout << "part 2" << endl;
 					resulTemp = mydigits[mydigits.size() - x] + carryover;
 					tempaddition.push_back(resulTemp % 10);
 					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
@@ -142,7 +164,7 @@ string largeint::operator+(largeint& rh) {
 			}
 		}
 	}
-	
+	newint = "";
 	for (int x = tempaddition.size()-1; x >= 0 ; x--) {
 		newint += to_string(tempaddition[x]);
 		cout << "new number" << newint << endl;
