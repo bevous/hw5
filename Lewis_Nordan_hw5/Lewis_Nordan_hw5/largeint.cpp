@@ -97,68 +97,43 @@ string largeint::operator+(largeint& rh) {
 	string newint = "";
 	
 	
-	for (int x = 0; x < mydigits.size() && x < rh.getdigits().size(); x++) {
-		// does all adition up to where the length of the numbers differs or there is leffovers to carry over
-		
-		resulTemp = (mydigits[mydigits.size()-1 - x] + rh.getdigits()[rh.getdigits().size()-1 - x] + carryover);
-		cout << "digits at pos" << x+1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+	//logic for numbers of the same size
+		// compare sizes enter if they are ==
+	if (mydigits.size == rh.getdigits().size()) {
+		// iterate through till the last digit
+		for (int x = 0; x < mydigits.size(); x++) {
+			//maths
+		}
+		//check for extra carryover
+		if (carryover != 0) {
+			//if there is carryover drop that number into its new place
+		}
+		//exit
+	}
+	//logic for numbers of different sizes
+		//compare sizes enter if they are not ==
+	if (mydigits.size() != rh.getdigits().size()) {
+		//iterate till the end of the shorter number
+		if (mydigits.size() < rh.getdigits().size()) {
+			for (int x = 0; x < mydigits.size(); x++) {
 
-		tempaddition.push_back(resulTemp % 10);
-		cout << "this place = " << resulTemp % 10 << endl;
-
-		carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-		cout << "carry = " << carryover <<'\n'<< endl;
-		// logic for numbers of differing length / extra carryover
-		int y = x + 1;
-		if ((x + 1 == mydigits.size() || x + 1 == rh.getdigits().size() && carryover != 0)) {
-			
-			cout << "in block 2" << endl;
-			while (carryover != 0 || y + 1 < mydigits.size() || y + 1 < rh.getdigits().size() ) { //check this for error
-				
-				cout << "in the loop" << '\n' << "x= " << x << '\n' << "y=" << y << endl;
-				if (mydigits.size() == rh.getdigits().size()) {
-					tempaddition.push_back(carryover);
-					carryover = 0;
-				}
-				// if number 2 is larger than number 1
-				else if (rh.getdigits().size() > mydigits.size()) { //check this ligic
-					cout << "part 1" << endl;
-					if (y < rh.getdigits().size()) {
-						resulTemp = rh.getdigits()[rh.getdigits().size() - y] + carryover;
-						cout << "digits at pos" << y + 1 << ":  " << rh.getdigits()[rh.getdigits().size() - y] << " + " << carryover << " = " << resulTemp << endl;
-						y += 1;
-						tempaddition.push_back(resulTemp % 10);
-						cout << "this place = " << resulTemp % 10 << endl;
-
-						carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-						cout << "carry = " << carryover << endl;
-					}
-					// fix this
-					if (carryover == 0 && y+1 < mydigits.size()) {
-						for (int y = x + 1; y < mydigits.size(); y++) {
-							cout << "finishing up" << endl;
-							tempaddition.push_back(mydigits[mydigits.size() - y]);
-						}
-					}
-
-				}
-				// number 1 is larger than number 2
-				else if (x + 1 == rh.getdigits().size()) {
-					cout << "part 2" << endl;
-					resulTemp = mydigits[mydigits.size() - x] + carryover;
-					tempaddition.push_back(resulTemp % 10);
-					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-					cout << "carry = " << carryover << endl;
-					if (carryover == 0 && x + 1 < mydigits.size()) {
-						for (int y = x + 1; y < rh.getdigits().size(); y++) {
-							cout << "finishing up" << endl;
-							tempaddition.push_back(rh.getdigits()[rh.getdigits().size() - y]);
-						}
-					}
-
-				}
 			}
 		}
+		else if (mydigits.size() > rh.getdigits().size()) {
+			for (int x = 0; x < rh.getdigits().size(); x++) {
+
+			}
+		}
+		//check carryover
+		if (carryover != 0) {
+			//carry till carryover == 0 or the end of the larger number
+			for (int x=)
+				//if pos == end of larger number && carryover != 0
+					//drop it down into its new place
+				//if carryover == 0 and pos != end of larger number
+					//drop all remaining digits
+		}
+	//exit
 	}
 	newint = "";
 	for (int x = tempaddition.size()-1; x >= 0 ; x--) {
