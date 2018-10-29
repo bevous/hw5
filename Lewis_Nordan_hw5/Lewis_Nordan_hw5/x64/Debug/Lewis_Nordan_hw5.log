@@ -1,3 +1,5 @@
 ﻿  largeint.cpp
-c:\users\lewis\documents\github\hw5\lewis_nordan_hw5\lewis_nordan_hw5\largeint.cpp(164): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\lewis\documents\github\hw5\lewis_nordan_hw5\lewis_nordan_hw5\largeint.cpp(154): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\lewis\documents\github\hw5\lewis_nordan_hw5\lewis_nordan_hw5\largeint.cpp(166): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\lewis\documents\github\hw5\lewis_nordan_hw5\lewis_nordan_hw5\largeint.cpp(185): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Lewis_Nordan_hw5.vcxproj -> C:\Users\Lewis\Documents\GitHub\hw5\Lewis_Nordan_hw5\x64\Debug\Lewis_Nordan_hw5.exe
