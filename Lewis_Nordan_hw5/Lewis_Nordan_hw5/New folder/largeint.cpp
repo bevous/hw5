@@ -102,15 +102,15 @@ string largeint::operator+(largeint& rh) {
 		// compare sizes enter if they are ==
 	if (mydigits.size() == rh.getdigits().size()) {
 		// iterate through till the last digit
-		cout << "the numbers are the same size" << endl;
+		//cout << "the numbers are the same size" << endl;
 		for (int x = 0; x < mydigits.size(); x++) {
 			//maths
 			resulTemp = mydigits[mydigits.size() -1 - x] + rh.getdigits()[rh.getdigits().size() - 1 - x] + carryover;
-			cout << "digits at pos" << x + 1 << ":  "<< mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+			//cout << "digits at pos" << x + 1 << ":  "<< mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
 			tempaddition.push_back(resulTemp % 10);
-			cout << "this place = " << resulTemp % 10 << endl;
+			//cout << "this place = " << resulTemp % 10 << endl;
 			carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-			cout << "carry = " << carryover << endl;
+			//cout << "carry = " << carryover << endl;
 		}
 		//check for extra carryover
 		if (carryover != 0) {
@@ -125,51 +125,51 @@ string largeint::operator+(largeint& rh) {
 	else if (mydigits.size() != rh.getdigits().size()) {
 		//iterate till the end of the shorter number
 		if (mydigits.size() < rh.getdigits().size()) {
-			cout << "number one is shorter than the second number" << endl;
+			//cout << "number one is shorter than the second number" << endl;
 			for (int x = 0; x < mydigits.size(); x++) {
 				//maths
 				resulTemp = mydigits[mydigits.size() - 1 - x] + rh.getdigits()[rh.getdigits().size() - 1 - x] + carryover;
-				cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+				//cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
 				tempaddition.push_back(resulTemp % 10);
-				cout << "this place = " << resulTemp % 10 << endl;
+				//cout << "this place = " << resulTemp % 10 << endl;
 				carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-				cout << "carry = " << carryover << endl;
+				//cout << "carry = " << carryover << endl;
 			}
-			cout << "finised with primary sddition" << endl;
+			//cout << "finised with primary sddition" << endl;
 		}
 		else if (mydigits.size() > rh.getdigits().size()) {
-			cout << "number one is shorter than the second number" << endl;
+			//cout << "number one is shorter than the second number" << endl;
 			for (int x = 0; x < rh.getdigits().size(); x++) {
 				//maths
 				resulTemp = mydigits[mydigits.size() - 1 - x] + rh.getdigits()[rh.getdigits().size() - 1 - x] + carryover;
-				cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+				//cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << rh.getdigits()[rh.getdigits().size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
 				tempaddition.push_back(resulTemp % 10);
-				cout << "this place = " << resulTemp % 10 << endl;
+				//cout << "this place = " << resulTemp % 10 << endl;
 				carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-				cout << "carry = " << carryover << endl;
+				//cout << "carry = " << carryover << endl;
 			}
 		}
 		//continue addition with the numbers left over
 		if (mydigits.size() < rh.getdigits().size()) {
 				for (int x = mydigits.size() ; x < rh.getdigits().size(); x++) {
 					resulTemp = rh.getdigits()[rh.getdigits().size() - 1 - x] + carryover;
-					cout << "digits at pos" << x + 1 << ":  " << rh.getdigits()[rh.getdigits().size() -1 - x] << " + " << carryover << " = " << resulTemp << endl;
+					//cout << "digits at pos" << x + 1 << ":  " << rh.getdigits()[rh.getdigits().size() -1 - x] << " + " << carryover << " = " << resulTemp << endl;
 					
 					tempaddition.push_back(resulTemp % 10);
-					cout << "this place = " << resulTemp % 10 << endl;
+					//cout << "this place = " << resulTemp % 10 << endl;
 					carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-					cout << "carry = " << carryover << endl;
+					//cout << "carry = " << carryover << endl;
 				}
 				
 		}
 		else if (mydigits.size() > rh.getdigits().size()) {
 			for (int x = rh.getdigits().size(); x < mydigits.size(); x++) {
 				resulTemp = mydigits[mydigits.size() - 1 - x] + carryover;
-				cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
+				//cout << "digits at pos" << x + 1 << ":  " << mydigits[mydigits.size() - 1 - x] << " + " << carryover << " = " << resulTemp << endl;
 				tempaddition.push_back(resulTemp % 10);
-				cout << "this place = " << resulTemp % 10 << endl;
+				//cout << "this place = " << resulTemp % 10 << endl;
 				carryover = (resulTemp - tempaddition[tempaddition.size() - 1]) / 10;
-				cout << "carry = " << carryover << endl;
+				//cout << "carry = " << carryover << endl;
 			}
 		}
 		//if pos == end of larger number && carryover != 0
@@ -188,7 +188,7 @@ string largeint::operator+(largeint& rh) {
 			newint += " , ";
 		}
 	}
-	cout << "new number" << newint << endl;
+	//cout << "new number" << newint << endl;
 	result.setInt(newint);
 	return newint;
 }
